@@ -71,14 +71,29 @@
     const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`);
     //the square bracket is for seectinr data attributes
     //.key is a dataclass
+    //this selects the html element itself
     
     if(!audio) return; // stops functions from running
     //weird js thing where you don't need curly brackets
     
     audio.currentTime = 0; //rewinds audio recording to the start
     audio.play(); // if call .play on an element that is aplaying,  it won't play again, cuz its cuccrent;;y
-    console.log(e)
+    key.classList.add('playing'); // add the playing attribute to the class name
   });
+
+  function removeTransition(e){
+    if(e.propertyName !== 'transform') return;
+    console.log(e.propertyName);
+  }
+
+  const keys = document.querySelectorAll('.key'); //gives you every single element with class key
+  //if you have an array of elements, you cannot listen ie, watch al of them, 
+  //you must loop thru all of them elements with key class
+  //atttach listener to each element
+
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  //for this arrow, function, key is the singular parameter
+  //transition end even occurs when a CSS transition has completed
 </script>
 
 
