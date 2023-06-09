@@ -11,8 +11,8 @@
 
   <div class="keys">
     <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">clap</span>
+      <kbd>A</kbd>  <!-- the key you should hit on your keyboard to activate it !-->
+      <span class="sound">clap</span> 
     </div>
     <div data-key="83" class="key">
       <kbd>S</kbd>
@@ -45,6 +45,7 @@
     <div data-key="76" class="key">
       <kbd>L</kbd>
       <span class="sound">tink</span>
+      <!--- //data attribute: when you create your own attribute: data-WHATEVER you made up, ie making ur own class -->
     </div>
   </div>
 
@@ -59,7 +60,25 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  //listen to the window, aka eht webpage
+  window.addEventListener('keydown', function(e) { //e refers to the event, ie the keydown
+    const audio = document.querySelector(`audio[data-key= "${e.keyCode}"]`);
+     //note: backticksss
+    //document query selector: looking in ur html file for
+    //the audio thing in paranthesis is how you select a data attribute within an element
+    //the dollar sign curly bracket thing lets you convert the keycode, a number to a string
 
+    const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`);
+    //the square bracket is for seectinr data attributes
+    //.key is a dataclass
+    
+    if(!audio) return; // stops functions from running
+    //weird js thing where you don't need curly brackets
+    
+    audio.currentTime = 0; //rewinds audio recording to the start
+    audio.play(); // if call .play on an element that is aplaying,  it won't play again, cuz its cuccrent;;y
+    console.log(e)
+  });
 </script>
 
 
