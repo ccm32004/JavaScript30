@@ -43,6 +43,27 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+
+  function logText(e){
+    console.log(this.classList.value); //logs what class it is
+    e.stopPropagation(); // no longer trigger events on the parents on its way up: NO MORE bubbling!
+  }
+
+  divs.forEach(div =>  div.addEventListener('click', logText, {
+    
+    capture: true,
+    once: true //listens for click once, then unbinds itself (only runs once)
+  
+  })); //for each div inputted into the parameter, each div that is clicked, returns logText function!
+
+  //bubbling: browser figure out what you've done, ie clicking three shows u clicked 2, 1 as well bc three is nested in two/1
+  //kinda giving inheritance
+
+  //captures top - down, then it bubbles up to the dom main elems
+
+  //capture true indicates that ur logtext funciton will not be run on the bubble up, but on the capture down
+  //capture true with stop propagation makes it go down one, then it stops moving at all, hence only ever clicking one, the outer most parent shell
 
 </script>
 </body>
